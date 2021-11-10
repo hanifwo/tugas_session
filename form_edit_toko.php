@@ -9,12 +9,13 @@ $error = 0;
 
 
 // Mendapatkan Data ID Barang
+if ( isset($_GET["foto"]) ) $foto = $_GET["foto"];
 if ( isset($_GET["id_barang"]) ) $id_barang = $_GET["id_barang"];
 if ( isset($_GET["nama_barang"]) ) $barang = $_GET["nama_barang"];
 echo($barang);
 if ( isset($_GET["harga"]) ) $harga = $_GET["harga"];
 if ( isset($_GET["stok"]) ) $stok = $_GET["stok"];
-else echo "ID barang tidak ditemukan! <a href='index.php'>Kembali</a>";
+else echo "ID barang tidak ditemukan! <a href='index_toko.php'>Kembali</a>";
 
 // // var_dump($result);
 // foreach ($result as $barang) {
@@ -58,8 +59,17 @@ else echo "ID barang tidak ditemukan! <a href='index.php'>Kembali</a>";
             <div class="container">
                     <div class="row d-flex justify-content-center">
                     <div class="col col-8 p-4 bg-light">
-                        <form action="action_edit_toko.php" method="POST">
+                        <form action="action_edit_toko.php" method="POST" enctype="multipart/form-data">
                             
+                            <?php if (!is_null($foto) && !empty($foto)) : ?>
+                                <div class="form-group mb-2">
+                                    <img src="<?=$foto?>" class="preview" />
+                                </div>
+                            <?php endif; ?>
+                            <div class="form-group mb-2">
+                                <label for="foto">Foto Barang</label>
+                                <input id="foto" class="form-control" type="file" name="foto">
+                            </div>
                             <div class="form-group mb-2">
                                 <label for="id_barang">Id Barang</label>
                                 <input id="id_barang" value="<?=$id_barang?>" class="form-control" type="text" name="id_barang" placeholder="Id Barang">

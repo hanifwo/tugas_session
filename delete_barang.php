@@ -5,7 +5,7 @@ require_once("connection_toko.php");
 //Mendapatkan Data barang
 if ( isset ($_GET["id_barang"]) ) $id_barang = $_GET["id_barang"];
 else {
-    echo "ID barang tidak ditemukan <a href='index.php'>Kembali</a>";
+    echo "ID barang tidak ditemukan <a href='index_toko.php'>Kembali</a>";
     exit();
 }
 
@@ -19,6 +19,6 @@ if ( ! $result ) {
     exit("Gagal menghapus data!");
 }
 
-header("Location: index.php");
+header("Location: index_toko.php");
 
 ?>

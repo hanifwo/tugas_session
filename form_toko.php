@@ -15,8 +15,12 @@
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col col-8 p-4 bg-light">
-                    <form action="action_add_toko.php" method="POST">
+                    <form action="action_add_toko.php" method="POST" enctype="multipart/form-data">
                         
+                        <div class="form-group mb-2">
+                            <label for="foto">Foto Barang</label>
+                            <input id="foto" class="form-control" type="file" name="foto">
+                        </div>
                         <div class="form-group mb-2">
                             <label for="id_barang">Id Barang</label>
                             <input id="id_barang" class="form-control" type="text" name="id_barang" placeholder="Id Barang">

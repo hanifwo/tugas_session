@@ -22,12 +22,30 @@ if ( $error == 1 ) {
 
 }
 
+// Mengambil data file upload
+$files = $_FILES['foto'];
+$path = "storage/";
+
+//Menangani file upload
+if ( !empty($files['name']) ) {
+    $filepath = $path . $files["name"];
+    $upload = move_uploaded_file($files["tmp_name"], $filepath);
+}
+else {
+    $filepath = "";
+    $upload = false;
+}
+
+//Menangani error saat upload file
+if ( $upload != true && $filepath = "") {
+    exit("Gagal Mengupload file! <a href='form_toko.php'>Kembali</a>");
+}
+
 $query = "
     INSERT INTO barang
-    (id_barang, barang, harga, stok)
+    (id_barang, barang, harga, stok, foto)
     VALUES
-    ('{$id_barang}', '{$barang}', '{$harga}', '{$stok}');
-";
+    ('{$id_barang}', '{$barang}', '{$harga}', '{$stok}', '{$filepath}');";
 
 //Mengkseksekusi MsSQL query
 $insert = mysqli_query($mysqli, $query);
@@ -35,7 +53,7 @@ $insert = mysqli_query($mysqli, $query);
 //Menangani ketika error pada saaat eksekusi query
 
 if ( $insert == false ) {
-    echo "Error dalam menambahkan data. <a href =='index.php'>Kembali</a>";
+    echo "Error dalam menambahkan data <a hrefo='index_toko.php'>Kembali</a>";
 } 
 else {
     header("Location: index_toko.php");

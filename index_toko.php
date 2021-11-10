@@ -93,6 +93,7 @@ $result = mysqli_query($mysqli, $query);
                             <thead>
                                 <tr>
                                     <th scope="col">No.</th>
+                                    <th scope="col">Foto</th>
                                     <th scope="col">ID Barang</th>
                                     <th scope="col">Barang</th>
                                     <th scope="col">Harga</th>
@@ -109,8 +110,14 @@ $result = mysqli_query($mysqli, $query);
 
                                     foreach ($result as $barang) {
 
+                                        if ( $barang['foto'] == null || empty ($barang["foto"]) ) {
+                                            $barang['foto'] = 'storage/default.jpg';
+                                        }
+
+
                                         echo '<tr>
                                             <th scope="row">' . $i++. '</th>
+                                            <td><img src="' . $barang["foto"] . '"</td>
                                             <td>' . $barang["id_barang"] . '</td>
                                             <td>' . $barang["barang"] . '</td>
                                             <td>' . $barang["harga"] . '</td>
@@ -120,6 +127,7 @@ $result = mysqli_query($mysqli, $query);
                                                 <a href="form_edit_toko.php?id_barang=' . $barang["id_barang"] .
                                                                         "&harga=" . $barang["harga"] .
                                                                         "&stok=" . $barang["stok"] . 
+                                                                        "&foto=" . $barang["foto"] .
                                                                         "&nama_barang=" . $barang["barang"] .'">Edit</a>
                                                 <a href="delete_barang.php?id_barang=' . $barang["id_barang"] . '" onclick="return confirm_delete()"">Delete</a>
 
